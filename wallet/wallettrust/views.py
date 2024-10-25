@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Wallet  # Импортируем модель Wallet
+# from django.http import HttpResponse
 from django.db import connection
 
 def info(request, WALLET_UUID):
@@ -12,13 +11,16 @@ def info(request, WALLET_UUID):
     balans = amount
 
     with connection.cursor() as cursor:
-
+        # добовляет значение текущей строки в БВЗЕ ДАННЫХ
         if operation == 'dep':
-            cursor.execute(f'UPDATE wallet_table SET balans = balans + {balans} WHERE walletid = {WALLET_UUID};') #добовляет значение текущей строки в БВЗЕ ДАННЫХ
-            # cursor.execute(f"insert into wallet_table (walletid, balans) values ('{WALLET_UUID}','{balans}')") это строка для созжания новой позиции в БАЗЕ ДАННЫХ
+            cursor.execute(f'UPDATE wallet_table SET balans = balans + {balans} WHERE walletid = {WALLET_UUID};')
 
+            # cursor.execute(f"insert into wallet_table (walletid, balans) values ('{WALLET_UUID}',
+            #                '{balans}')") # это строка для созжания новой позиции в БАЗЕ ДАННЫХ
+
+        # отнимает значение текущей строки в БВЗЕ ДАННЫХ
         elif operation == 'w':
-            cursor.execute(f'UPDATE wallet_table SET balans = balans - {balans} WHERE walletid = {WALLET_UUID};')#отнимает значение текущей строки в БВЗЕ ДАННЫХ
+            cursor.execute(f'UPDATE wallet_table SET balans = balans - {balans} WHERE walletid = {WALLET_UUID};')
 
 
         cursor.execute(f"select * from wallet_table")

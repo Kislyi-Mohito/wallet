@@ -30,3 +30,23 @@ git pull
 ---------------------------------------------------
 test commit of pull request
 test commit of pull response
+--------------------------------------------------------------------------------------------
+FROM python:3-slim-buster  мы устонавливаем образ(ОС + приложения)
+
+LABEL maintainer="nedenis.ste@gmail.com"  Моя подпись
+
+WORKDIR /wallet_app         Создание корневой папки проекта (должна отличатся от самой папки проекта)
+
+ENV PYTHONPATH=/wallet_app   указываю что эта папка является корневой
+
+RUN python3 -m venv venv     создаю виртуаьную среду 
+
+RUN /wallet_app/venv/bin/pip install --no-cache-dir pyarrow==13.0.0     устанавливаю необходимые библиотеки для работы контейнера
+
+COPY requirements.txt /wallet_app/requirements.txt              копирую список библиотек в в папку проекта
+
+RUN /wallet_app/venv/bin/pip install --no-cache-dir -r /wallet_app/requirements.txt      устанавливаю бибоиотеки из папки которую скопировал для работы проекта
+
+COPY wallet /wallet_app/wallet      копирую сам проект на Джанго
+
+CMD python /wallet_app/wallet/manage.py runserver   Запускаю его
