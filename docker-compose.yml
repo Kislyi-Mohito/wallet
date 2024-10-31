@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: ["./wait-for-it.sh", "db:5432", "--", "python", "wallet/manage.py", "runserver", "0.0.0.0:8000"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/wallet_app
+    depends_on:
+      - db  # Указываем, что сервис web зависит от db
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: "wallet"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: '00000'
+    ports:
+      - "5432:5432"  # Подключение PostgreSQL на стандартный порт

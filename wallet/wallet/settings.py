@@ -79,9 +79,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'wallet',         # Имя вашей базы данных
         'USER': 'postgres',      # Имя пользователя PostgreSQL
-        'PASSWORD': '00000',  # Пароль пользователя
-        'HOST': 'localhost',     # Хост сервера базы данных (localhost для локальной работы)
-        'PORT': '5432',          # Порт, который использует PostgreSQL (по умолчанию 5432)
+        'PASSWORD': '00000',      # Пароль пользователя
+        'HOST': 'db',             # Используем имя сервиса Docker (db) вместо localhost
+        'PORT': '5432',           # Порт, который использует PostgreSQL (по умолчанию 5432)
+        'CONN_MAX_AGE': 5,
     }
 }
 
