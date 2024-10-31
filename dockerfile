@@ -11,6 +11,7 @@ RUN apt-get update && \
 # Копируем файл зависимостей
 COPY requirements.txt .
 
+
 # Установка зависимостей
 RUN pip install --no-cache-dir -r requirements.txt
 

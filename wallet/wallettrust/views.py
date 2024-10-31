@@ -15,8 +15,7 @@ def info(request, WALLET_UUID):
         if operation == 'dep':
             cursor.execute(f'UPDATE wallet_table SET balans = balans + {balans} WHERE walletid = {WALLET_UUID};')
 
-            # cursor.execute(f"insert into wallet_table (walletid, balans) values ('{WALLET_UUID}',
-            #                '{balans}')") # это строка для созжания новой позиции в БАЗЕ ДАННЫХ
+            #cursor.execute(f"insert into wallet_table (walletid, balans) values ('{WALLET_UUID}','{balans}')") # это строка для созжания новой позиции в БАЗЕ ДАННЫХ
 
         # отнимает значение текущей строки в БВЗЕ ДАННЫХ
         elif operation == 'w':
